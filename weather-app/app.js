@@ -12,11 +12,10 @@ else
         getWeather(coords, (error, dataWeather) =>
         {
             if (error) {return console.log(error)}
-            
             console.log('Place Name: ',placeName)
-            console.log(dataWeather.daily.data[0].summary)
-            console.log(`It is currently ${dataWeather.currently.temperature} degrees out right now. \n`+
-                        `There is a ${dataWeather.daily.data[0].precipProbability}% chance of rain today.`)
+            console.log(dataWeather.summaryToday)
+            console.log(`It is currently ${dataWeather.tempNow} degrees out right now. \n`+
+                        `There is a ${dataWeather.rainToday}% chance of rain today.`)
         })
     })
 }

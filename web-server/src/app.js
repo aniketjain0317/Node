@@ -1,6 +1,9 @@
 const path = require('path')
 const express = require('express')
 const hbs = require('hbs')
+const getCoords = require('./utils/map')
+const getWeather = require('./utils/weather')
+
 
 const app = express()
 
@@ -46,12 +49,32 @@ app.get('/help', (req,res) =>
     })
 })
 
+//Returns the weather data as JSON
 app.get('/weather', (req,res) =>
 {
-    res.send
-    ({
-        forecast: 'It is wednesday',
-        location: 'my dudes'
+    const address= req.query.address
+    if (!address)
+    {
+        return res.send(
+        {
+            error: "You must provide an address"        
+        })
+    }
+
+    getCoords(address,(error,dataMap) =>
+    {
+        if(error) {return res.send( {error} )}
+        
+        const {strCoords,placeName} = dataMap
+        getWeather(strCoords, (error, dataWeather) =>
+        {
+            if(error) {return res.send( {error} )}
+            
+            res.send(
+            {
+                dataWeather, placeName
+            })
+        })
     })
 })
 
