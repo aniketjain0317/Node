@@ -17,10 +17,8 @@ weatherForm.addEventListener('submit',(e) =>
         {
             if(data.error) {return messageOne.textContent = (data.error)}
             const {dataWeather,placeName} = data
-            messageTwo.textContent = ('Place Name: ',placeName) + '\n' +
-                                      (dataWeather.summaryToday) + '\n' +
-                                      (`It is currently ${dataWeather.tempNow} degrees out right now. \n`+
-                                       `There is a ${dataWeather.rainToday}% chance of rain today.`)
+            messageOne.textContent = placeName
+            messageTwo.textContent = dataWeather.forecast
         })
     })
 })

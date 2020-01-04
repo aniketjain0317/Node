@@ -15,7 +15,10 @@ const getWeather = (coords, callback) =>
             {
                 summaryToday: body.daily.data[0].summary,
                 rainToday: body.daily.data[0].precipProbability,
-                tempNow: body.currently.temperature
+                tempNow: body.currently.temperature,
+                forecast: `${body.daily.data[0].summary} 
+                        \n The temperature is ${body.currently.temperature} degress right now.
+                        \n There is a ${body.daily.data[0].precipProbability}% chance of rain today.h` 
             }
         }
         callback(errorCB,dataCB)
