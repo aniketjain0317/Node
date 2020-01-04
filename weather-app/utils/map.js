@@ -6,8 +6,8 @@ const getCoords = (address,callback) =>
     {
         var errorCB=undefined
         var dataCB=undefined
-        if (error)                        { return errorCB = 'Unable to access map service'}
-        else if (!body.features) {return errorCB = 'Unable to find location'}
+        if (error)                        {errorCB = 'Unable to access map service'}
+        else if (!body.features.length) {errorCB = 'Unable to find location'}
         else
         {
             const placeName = body.features[0].place_name

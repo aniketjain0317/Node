@@ -61,19 +61,15 @@ app.get('/weather', (req,res) =>
         })
     }
 
-    getCoords(address,(error,dataMap) =>
+    getCoords(address,(error,dataMap={}) =>
     {
         if(error) {return res.send( {error} )}
+        const {coords,placeName} = dataMap
         
-        const {strCoords,placeName} = dataMap
-        getWeather(strCoords, (error, dataWeather) =>
+        getWeather(coords, (error, dataWeather={}) =>
         {
             if(error) {return res.send( {error} )}
-            
-            res.send(
-            {
-                dataWeather, placeName
-            })
+            res.send( {dataWeather, placeName} )
         })
     })
 })

@@ -1,7 +1,8 @@
 const request = require('request')
 const getWeather = (coords, callback) =>
 {
-    const url = `https://api.darksky.net/forecast/c0e37637b7221086102d09d4bcd6ac28/${coords}?units=ca`
+    const access_token='c0e37637b7221086102d09d4bcd6ac28'
+    const url = `https://api.darksky.net/forecast/${access_token}/${coords}?units=ca`
     request( {url, json: true}, (error, {body}) => 
     {
         var errorCB=undefined
