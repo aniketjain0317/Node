@@ -1,26 +1,12 @@
-// const add = (a,b,callback) =>
-// {
-//     setTimeout(() => 
-//     {
-//         callback(a+b)
-//     }, 2000)
-// }
-
-
-// add(1,4, (sum) => 
-// {
-//     console.log(sum)   
-// })
-
-const add = (a,b,callback) => 
+const doWorkwithCb = (data, callback) =>
 {
-    setTimeout(() => 
+    setTimeout(() =>
     {
-        const sum = a+b
-        callback(sum)
-    }, 2000)
+        callback(undefined,data)
+    },2000)
 }
-add(1,4,(sumC)=>
+
+doWorkwithCb([1,3,5], (error,data) =>
 {
-    console.log(sumC)
+    console.log(data)
 })
