@@ -52,7 +52,7 @@ const userSchema = new mongoose.Schema
         {
             if(value.toLowerCase().includes("password"))
             {
-                throw new Error("Please choose a less chutiya password")
+                throw new Error("Please choose a valid password")
             }
         }
     },
@@ -64,7 +64,12 @@ const userSchema = new mongoose.Schema
             type: String,
             required: true
         }
-    }]
+    }],
+
+    avatar:
+    {
+        type: Buffer
+    }
 }, {timestamps: true})
 
 
@@ -96,7 +101,7 @@ userSchema.methods.toJSON = function()
 userSchema.methods.genAuthToken = async function ()
 {
     const user = this
-    const token = jwt.sign({_id: user._id.toString()}, 'thesecretis42')
+    const token = jwt.sign({_id: user._id.toString()}, process.env.JWT_SECRET)
     user.tokens = user.tokens.concat({token})
     await user.save()
     return token
